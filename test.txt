@@ -1,0 +1,4 @@
+hello
+this is test.txt for vim
+Thank you
+I love you
