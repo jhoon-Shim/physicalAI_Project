@@ -35,7 +35,7 @@ if __name__ == '__main__':
             target=sensor_worker, args=(sensor_q, stop_sig))
     p2_list = [multiprocessing.Process(
             target=ai_inference_worker, args=(sensor_q, stop_sig))
-            for _ in range(30)]
+            for _ in range(30)] # 30번 반복하는데 몇 번째인진 관심없다 
 
     p1.start()
     for p2 in p2_list:
