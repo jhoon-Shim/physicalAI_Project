@@ -18,29 +18,26 @@ def edge_detection_pipeline():
         # 결과 표시
         # cv2.imshow('Original Video', frame)
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        blurred_avg_frame = cv2.blur(gray_frame, (5, 5))
+        blur_median   = cv2.medianBlur(gray_frame, 5)
         
-        # BGR → HSV
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-        # 파란색 범위 정의
-        lower_blue = np.array([100, 150, 50])
-        upper_blue = np.array([140, 255, 255])
-
-        # 마스크 생성 및 적용
-
-        mask = cv2.inRange(hsv, lower_blue, upper_blue)
-        masked = cv2.bitwise_and(gray_frame, gray_frame, mask=mask)
-
-        # 마스킹 된 영역에만 에지 검출 적용
+        sobelx     = cv2.Sobel(blurred_avg_frame, cv2.CV_64F, 1, 0, ksize=3)
+        sobely     = cv2.Sobel(blurred_avg_frame, cv2.CV_64F, 0, 1, ksize=3)
+        magnitude = np.sqrt(sobelx**2 + sobely**2)
+        magnitude = np.uint8(np.clip(magnitude, 0, 255))
+        
         low = cv2.getTrackbarPos('Low Threshold', 'Controls')
         high = cv2.getTrackbarPos('High Threshold', 'Controls')
-        edges = cv2.Canny(masked, low, high) 
-        cv2.imshow('Only Blue Viceo',edges)
+        edges = cv2.Canny(blurred_avg_frame, low, high)
+        cv2.imshow('edge Viceo',edges)
 
-        # 'q' 키를 누르면 종료 (25ms 대기)
-        if cv2.waitKey(25) & 0xFF == ord('q'):
+        key = cv2.waitKey(25) & 0xFF  # 's'키: 현재 프레임 저장
+        if key == ord('s'):
+            cv2.imwrite('result.png', edges)
+            print("에지 이미지 저장 완료: result.png")
+        if key == ord('q'): # 'q'키: 종료
             break
-
+        
     # 리소스 해제
     cap.release()
     cv2.destroyAllWindows()
@@ -50,3 +47,4 @@ cv2.namedWindow('Controls')
 cv2.createTrackbar('Low Threshold', 'Controls', 100, 255, lambda x: None)
 cv2.createTrackbar('High Threshold', 'Controls', 200, 255, lambda x: None)
 edge_detection_pipeline()
+
