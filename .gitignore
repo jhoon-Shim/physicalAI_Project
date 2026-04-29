@@ -2,3 +2,5 @@
 .env
 __pycache__/
 processed_view.png
+*.pt
+calib_images/
