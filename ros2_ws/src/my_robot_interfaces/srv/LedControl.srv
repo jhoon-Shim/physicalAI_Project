@@ -1,0 +1,6 @@
+# Request (요청): 클라이언트가 서버로 보내는 데이터
+bool state        # True: 켜기, False: 끄기
+---
+# Response (응답): 서버가 클라이언트에 돌려주는 데이터
+bool success      # 성공 여부 (True/False)
+string message    # 처리 결과 메시지 (예: "LED를 켰습니다")

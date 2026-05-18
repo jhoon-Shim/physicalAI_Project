@@ -1,0 +1,8 @@
+# 1. Goal: 클라이언트가 서버에 보내는 목표
+float32 target_distance   # 이동할 목표 거리
+---
+# 2. Result: 작업이 완료된 후 서버가 보내는 최종 결과
+bool reached              # 목표 도달 성공 여부
+---
+# 3. Feedback: 작업 진행 중에 서버가 실시간으로 보내는 정보
+float32 current_distance  # 현재까지 이동한 거리
