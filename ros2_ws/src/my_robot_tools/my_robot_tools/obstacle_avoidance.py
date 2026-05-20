@@ -27,7 +27,7 @@ class ObstacleAvoidance(Node):
         twist_msg = Twist()
         
         # 기본 주행 속도 세팅: 전방에 아무것도 없으면 초속 15cm(0.15) (--> 0.5 로 변경)로 직진합니다.
-        linear_vel = 0.7
+        linear_vel = 0.5
         angular_vel = 0.0
         
         # 라이다가 보내온 전체 거리 데이터 배열의 개수를 파악합니다. (보통 360개)
