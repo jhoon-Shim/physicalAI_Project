@@ -19,7 +19,7 @@ ament_target_dependencies(obstacle_avoidance rclcpp sensor_msgs geometry_msgs)
 
 # install folders
 install(
-  DIRECTORY urdf launch rviz worlds
+  DIRECTORY urdf launch rviz worlds config
   DESTINATION share/${PROJECT_NAME}
 )
 

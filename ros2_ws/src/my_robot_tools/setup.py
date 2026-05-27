@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'obstacle_avoidance = my_robot_tools.obstacle_avoidance:main',
+            'pid_arm = my_robot_tools.pid_arm_control:main',
         ],
     },
 )
